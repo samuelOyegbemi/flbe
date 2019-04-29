@@ -1,0 +1,30 @@
+version: '3'
+services:
+    app:
+        build:
+            context: app
+            dockerfile: ./docker/Dockerfile
+        ports:
+            - ${APP_PORT}:${APP_PORT}
+        volumes:
+            - ./app:${APP_DIR}
+        environment:
+            - APP_DIR=${APP_DIR}
+            - FLASK_ENV=development
+        container_name: florom_backend_app
+        depends_on:
+            - database
+    database:
+        build:
+            context: database
+            dockerfile: ./docker/Dockerfile
+        ports:
+            - ${DB_PORT}:${DB_PORT}
+        restart: always
+        environment:
+            MYSQL_DATABASE: ${MYSQL_DB}
+            MYSQL_ROOT_PASSWORD: ${MYSQL_PW}
+            MYSQL_USER: ${MYSQL_USER}
+            MYSQL_PASSWORD: ${MYSQL_PW}
+        container_name: florom_db
+

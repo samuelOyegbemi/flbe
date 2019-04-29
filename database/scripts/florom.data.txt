@@ -1,0 +1,75 @@
+-- phpMyAdmin SQL Dump
+-- version 4.8.3
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Generation Time: Apr 26, 2019 at 10:11 PM
+-- Server version: 10.1.36-MariaDB
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Dumping data for table `email_list`
+--
+
+--INSERT INTO `email_list` (`email`, `user_id`, `activated_on`, `subscribe_to_news`, `is_default`) VALUES
+--('adebayovictor17@yahoo.com', 'P4G6I26FER', NULL, 0, 1),
+--('bayosamuel84@yahoo.com', 'QI5G0EKD6O', NULL, 0, 0),
+--('floromsolutions@gmail.com', 'CI4POCL46Z', NULL, 0, 1),
+--('SamuelOyegbemi@gmail.com', 'QI5G0EKD6O', NULL, 0, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user`
+--
+--
+-- Dumping data for table `user`
+--
+
+--INSERT INTO `user` (`user_id`, `about`, `status`, `register_on`) VALUES
+--('CI4POCL46Z', '', 'INACTIVE', 1546354666),
+--('P4G6I26FER', '', 'ACTIVE', 1548011731),
+--('QI5G0EKD6O', '', 'ACTIVE', 1545995882);
+
+-- --------------------------------------------------------
+
+-- Dumping data for table `user_address`
+--
+
+--INSERT INTO `user_address` (`user_id`, `street_no`, `street_name`, `city`, `province`, `postal_code`, `state`, `country`, `status`) VALUES
+--('P4G6I26FER', '16', 'Karimu Kotun', 'Lagos', 'Victoria Island', '', '', '', 'INACTIVE');
+
+-- --------------------------------------------------------
+
+------------------------------------------------------
+
+-- Dumping data for table `user_name`
+--
+
+--INSERT INTO `user_name` (`user_id`, `first`, `last`, `other`) VALUES
+--('CI4POCL46Z', 'Florom', 'Solutions', ''),
+--('P4G6I26FER', 'Vicky', 'Adebayo', ''),
+--('QI5G0EKD6O', 'Samuel', 'Oyegbemi', '');
+
+-- --------------------------------------------------------
+
+-- Dumping data for table `user_pass`
+--
+
+--INSERT INTO `user_pass` (`user_id`, `password`) VALUES
+--('CI4POCL46Z', 'Joy4samuel'),
+--('P4G6I26FER', 'samuel'),
+--('QI5G0EKD6O', 'Joy4samuel');
+
+--
+-- Indexes for dumped tables
+--
+--COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
