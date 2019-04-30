@@ -7,11 +7,11 @@ services:
         ports:
             - ${APP_PORT}:${APP_PORT}
         volumes:
-            - ./app:${APP_DIR}
+            - ./app/src:${APP_DIR}/src
         environment:
             - APP_DIR=${APP_DIR}
             - FLASK_ENV=development
-        container_name: florom_backend_app
+        container_name: flbe_app
         depends_on:
             - database
     database:
@@ -26,5 +26,5 @@ services:
             MYSQL_ROOT_PASSWORD: ${MYSQL_PW}
             MYSQL_USER: ${MYSQL_USER}
             MYSQL_PASSWORD: ${MYSQL_PW}
-        container_name: florom_db
+        container_name: flbe_db
 
