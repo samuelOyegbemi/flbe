@@ -64,10 +64,10 @@ CREATE TABLE IF NOT EXISTS `department` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `email_list`
+-- Table structure for table `user_email`
 --
 
-CREATE TABLE IF NOT EXISTS `email_list` (
+CREATE TABLE IF NOT EXISTS `user_email` (
   `email` varchar(100) NOT NULL DEFAULT '',
   `user_id` varchar(50) NOT NULL DEFAULT '',
   `activated_on` int(50) DEFAULT NULL,
@@ -199,6 +199,7 @@ CREATE TABLE IF NOT EXISTS `role` (
 
 CREATE TABLE IF NOT EXISTS `staff` (
   `staff_id` varchar(100) NOT NULL DEFAULT '',
+  `user_id` varchar(100) NOT NULL DEFAULT '',
   `department_id` varchar(100) DEFAULT '',
   `d_o_b` varchar(100) DEFAULT '',
   `sex` varchar(100) DEFAULT '',
@@ -227,17 +228,18 @@ CREATE TABLE IF NOT EXISTS `user` (
   `user_id` varchar(50) NOT NULL DEFAULT '',
   `about` varchar(500) DEFAULT '',
   `status` varchar(20) DEFAULT 'INACTIVE',
-  `register_on` int(50) DEFAULT NULL
+  `registered_since` timestamp DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user_address`
+-- Table structure for table `address`
 --
 
-CREATE TABLE IF NOT EXISTS `user_address` (
-  `user_id` varchar(100) NOT NULL DEFAULT '',
+CREATE TABLE IF NOT EXISTS `address` (
+  `address_id` varchar(100) NOT NULL DEFAULT '',
+  `subject_id` varchar(100) NOT NULL DEFAULT '',
   `street_no` varchar(100) DEFAULT '',
   `street_name` varchar(100) DEFAULT '',
   `city` varchar(100) DEFAULT '',
@@ -312,9 +314,9 @@ ALTER TABLE `department`
   ADD KEY `hod_id` (`hod_id`);
 
 --
--- Indexes for table `email_list`
+-- Indexes for table `user_email`
 --
-ALTER TABLE `email_list`
+ALTER TABLE `user_email`
   ADD PRIMARY KEY (`email`),
   ADD KEY `user_id` (`user_id`);
 
@@ -384,6 +386,7 @@ ALTER TABLE `role`
 --
 ALTER TABLE `staff`
   ADD PRIMARY KEY (`staff_id`),
+  ADD UNIQUE KEY `user_id` (`user_id`),
   ADD KEY `department_id` (`department_id`),
   ADD KEY `nation_id` (`nation_id`);
 
@@ -401,10 +404,10 @@ ALTER TABLE `user`
   ADD PRIMARY KEY (`user_id`);
 
 --
--- Indexes for table `user_address`
+-- Indexes for table `address`
 --
-ALTER TABLE `user_address`
-  ADD PRIMARY KEY (`user_id`);
+ALTER TABLE `address`
+  ADD PRIMARY KEY (`address_id`);
 
 --
 -- Indexes for table `user_interest`
@@ -452,10 +455,10 @@ ALTER TABLE `department`
   ADD CONSTRAINT `department_ibfk_2` FOREIGN KEY (`hod_id`) REFERENCES `user` (`user_id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 --
--- Constraints for table `email_list`
+-- Constraints for table `user_email`
 --
-ALTER TABLE `email_list`
-  ADD CONSTRAINT `email_list_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `user_email`
+  ADD CONSTRAINT `user_email_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `employment_history`
@@ -510,7 +513,7 @@ ALTER TABLE `role`
 -- Constraints for table `staff`
 --
 ALTER TABLE `staff`
-  ADD CONSTRAINT `staff_ibfk_1` FOREIGN KEY (`staff_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `staff_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `staff_ibfk_2` FOREIGN KEY (`department_id`) REFERENCES `department` (`department_id`) ON DELETE SET NULL ON UPDATE CASCADE,
   ADD CONSTRAINT `staff_ibfk_3` FOREIGN KEY (`nation_id`) REFERENCES `nationality` (`nation_id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
@@ -520,12 +523,6 @@ ALTER TABLE `staff`
 ALTER TABLE `staff_role`
   ADD CONSTRAINT `staff_role_ibfk_1` FOREIGN KEY (`staff_id`) REFERENCES `staff` (`staff_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `staff_role_ibfk_2` FOREIGN KEY (`role_id`) REFERENCES `role` (`role_id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `user_address`
---
-ALTER TABLE `user_address`
-  ADD CONSTRAINT `user_address_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `user_interest`

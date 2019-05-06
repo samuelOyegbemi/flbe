@@ -7,7 +7,7 @@ services:
         ports:
             - ${APP_PORT}:${APP_PORT}
         volumes:
-            - ./app/src:${APP_DIR}/src
+            - ./app/src:${APP_DIR}/app/src
         environment:
             - APP_DIR=${APP_DIR}
             - FLASK_ENV=development

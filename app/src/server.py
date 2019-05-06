@@ -1,26 +1,21 @@
-from flask import Flask, request, jsonify
-import os
-import uuid
-import json
-from src.database.connect import query_db
-
+from flask import Flask, request
+from app.src.helpers.db import database
+from app.src.helpers import http
 
 app = Flask(__name__)
 app.debug = True
 
 
-@app.route('/')
+@app.route('/', methods=[http.HTTPMethod.GET.value])
 def index():
-    hostname = os.uname()[1]
-    randomid = uuid.uuid4()
-    us = query_db("""SELECT * FROM user
-              WHERE user_id = %s""", (123,))
-    return jsonify({"Hostname": hostname, "UUID": str(randomid), "user": us})
+    us = database.select_raw("""SELECT * FROM user
+              WHERE user_id = %s""", (123,), True)
+    return http.create_response(data={"user": us}, code=200)
 
 
-@app.route('/login')
+@app.route('/health-check', methods=[http.HTTPMethod.GET.value, http.HTTPMethod.POST.value])
 def login():
-    return 'Hi, I am in login page, and i am updating'
+    return http.create_response(message="Oh! Thanks for checking on me, I'm in good health")
 
 
 if __name__ == '__main__':

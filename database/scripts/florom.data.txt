@@ -12,10 +12,10 @@
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Dumping data for table `email_list`
+-- Dumping data for table `user_email`
 --
 
---INSERT INTO `email_list` (`email`, `user_id`, `activated_on`, `subscribe_to_news`, `is_default`) VALUES
+--INSERT INTO `user_email` (`email`, `user_id`, `activated_on`, `subscribe_to_news`, `is_default`) VALUES
 --('adebayovictor17@yahoo.com', 'P4G6I26FER', NULL, 0, 1),
 --('bayosamuel84@yahoo.com', 'QI5G0EKD6O', NULL, 0, 0),
 --('floromsolutions@gmail.com', 'CI4POCL46Z', NULL, 0, 1),
@@ -30,7 +30,7 @@
 -- Dumping data for table `user`
 --
 
---INSERT INTO `user` (`user_id`, `about`, `status`, `register_on`) VALUES
+--INSERT INTO `user` (`user_id`, `about`, `status`, `registered_since`) VALUES
 --('CI4POCL46Z', '', 'INACTIVE', 1546354666),
 --('P4G6I26FER', '', 'ACTIVE', 1548011731),
 --('QI5G0EKD6O', '', 'ACTIVE', 1545995882);
