@@ -36,8 +36,8 @@ def save_user(user: dict) -> dict:
         raise Exception("password should be minimum of 8 characters")
     elif user["password"] != user["confirm_password"]:
         raise Exception("password do not match")
-    elif bool("user_id" in check_user(user["email"]).keys()):
-        raise Exception("user with " + user["email"] + "already exists!")
+    elif bool("user_id" in check_user(user.get("email")).keys()):
+        raise Exception("user with " + user.get("email") + "already exists!")
     else:
         user["user_id"] = generate_id(20)
         user_keys = ["user_id", "about", "status", "registered_since"]
@@ -57,8 +57,8 @@ def save_user(user: dict) -> dict:
         ue["is_default"] = True
         database.insert("user_email", ue)
 
-        us = get_user(user["user_id"])
-        if "user_id" in us.keys() and us["user_id"] == user["user_id"]:
+        us = get_user(user.get("user_id"))
+        if bool(us.get("user_id")):
             return us
         else:
             raise Exception("Opps an error occurred! user data not saved.")
@@ -74,8 +74,8 @@ def change_default_email(user_id, email, is_default=True):
     where = "user_id = " + user_id + " AND email = " + email
     u_emails = get_user_emails(user_id)
 
-    if len(list(filter(lambda e: bool(e["email"]) == email, u_emails))) < 1:
-        raise Exception("Email " + email + " does not exist or does not belong to specify user!")
+    if len(list(filter(lambda e: bool(e.get("email")) == email, u_emails))) < 1:
+        raise Exception("Email " + email + " does not exist or belongs to a different user!")
     elif is_default is True:
         default = list(filter(lambda e: bool(e["is_default"]) is True, u_emails))
         if bool(default) and len(default) > 0:

@@ -2,15 +2,16 @@ FROM python:3.7-alpine
 
 MAINTAINER Samuel Oyegbemi <samueloyegbemi@gmail.com>
 
+
 ENV APP_PORT=5000 APP_DIR=/var/www/flbe FLASK_ENV=development
 
 RUN apk add nginx supervisor python3-dev build-base linux-headers pcre-dev mariadb-dev
 
 RUN pip3 install --upgrade pip
 
-COPY ./docker/requirements.txt ${APP_DIR}/app/requirements.txt
+COPY ./docker/requirements.txt /usr/local/requirements.txt
 
-RUN pip3 install -r ${APP_DIR}/app/requirements.txt
+RUN pip3 install -r /usr/local/requirements.txt
 
 RUN rm -r /root/.cache
 
